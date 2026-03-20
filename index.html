@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoadFlare — Rides from people you trust</title>
+    <meta name="description" content="Request rides from your personal driver network. No strangers, no surge pricing, no middleman. Built on Nostr.">
+    <meta name="theme-color" content="#F49500">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="RoadFlare — Rides from people you trust">
+    <meta property="og:description" content="Request rides from your personal driver network. No strangers, no surge pricing, no middleman.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://roadflare.app">
+
+    <style>
+        :root {
+            --orange: #F49500;
+            --orange-light: #FFB84D;
+            --orange-glow: rgba(244, 149, 0, 0.15);
+            --bg: #0A0A0A;
+            --bg-card: #141414;
+            --bg-card-hover: #1A1A1A;
+            --text: #F5F5F5;
+            --text-muted: #888;
+            --text-dim: #555;
+            --border: #222;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--orange-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .logo-mark {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 40px rgba(244, 149, 0, 0.3));
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 span {
+            background: linear-gradient(135deg, var(--orange), var(--orange-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: var(--text-muted);
+            max-width: 540px;
+            margin-bottom: 3rem;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 2rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--orange);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background: var(--orange-light);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 30px rgba(244, 149, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--text-dim);
+            transform: translateY(-1px);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--orange);
+            border: 1px solid rgba(244, 149, 0, 0.3);
+            background: rgba(244, 149, 0, 0.08);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* Features */
+        .features {
+            padding: 6rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3.5rem;
+            font-weight: 600;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.2s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--text-dim);
+            transform: translateY(-2px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* How it works */
+        .how-it-works {
+            padding: 6rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .how-it-works h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3.5rem;
+            font-weight: 600;
+        }
+
+        .step {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+            align-items: flex-start;
+        }
+
+        .step-num {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--orange);
+        }
+
+        .step h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .step p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Protocol */
+        .protocol-section {
+            padding: 6rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .protocol-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .protocol-section .desc {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-size: 1.05rem;
+        }
+
+        .tech-pills {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .pill {
+            padding: 0.5rem 1.2rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--orange);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 640px) {
+            .feature-grid { grid-template-columns: 1fr; }
+            .step { flex-direction: column; gap: 0.75rem; }
+            .cta-group { flex-direction: column; align-items: center; }
+            .footer-links { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<section class="hero">
+    <div class="logo-mark">🔥</div>
+    <div class="badge">Coming to TestFlight</div>
+    <h1>Rides from people<br>you <span>trust</span></h1>
+    <p class="tagline">Request rides from your personal driver network. No strangers, no surge pricing, no middleman. End-to-end encrypted on Nostr.</p>
+    <div class="cta-group">
+        <a href="https://github.com/variablefate/ridestr" class="btn btn-primary">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            View on GitHub
+        </a>
+        <a href="https://github.com/variablefate/roadflare-ios" class="btn btn-secondary">iOS App</a>
+    </div>
+</section>
+
+<section class="features">
+    <h2>Why RoadFlare</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3>Your network, your rides</h3>
+            <p>Only request rides from drivers you personally know and trust. No algorithmic matching with strangers.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔑</div>
+            <h3>End-to-end encrypted</h3>
+            <p>Ride details, locations, and messages are NIP-44 encrypted. Only you and your driver can see them.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">💸</div>
+            <h3>No platform fees</h3>
+            <p>Pay your driver directly with Zelle, Venmo, Cash App, or cash. Zero commission, zero surge pricing.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📡</div>
+            <h3>Decentralized</h3>
+            <p>Built on Nostr. No central server, no company that can shut it down. Your keys, your identity, your data.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🤝</div>
+            <h3>Cross-platform</h3>
+            <p>iOS riders work with Android drivers. The Ridestr protocol is open — anyone can build a compatible app.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📍</div>
+            <h3>Privacy by design</h3>
+            <p>Approximate locations until your driver is close. PIN verification at pickup. Progressive reveal protects your exact address.</p>
+        </div>
+    </div>
+</section>
+
+<section class="how-it-works">
+    <h2>How it works</h2>
+    <div class="step">
+        <div class="step-num">1</div>
+        <div>
+            <h3>Add your driver</h3>
+            <p>Scan their QR code or enter their Nostr public key. They approve you and share their RoadFlare encryption key.</p>
+        </div>
+    </div>
+    <div class="step">
+        <div class="step-num">2</div>
+        <div>
+            <h3>See when they're available</h3>
+            <p>Your driver's approximate location appears on the map when they're online. No tracking — just availability.</p>
+        </div>
+    </div>
+    <div class="step">
+        <div class="step-num">3</div>
+        <div>
+            <h3>Request a ride</h3>
+            <p>Tap your driver, set your destination, and send an encrypted offer. They see the fare estimate and route.</p>
+        </div>
+    </div>
+    <div class="step">
+        <div class="step-num">4</div>
+        <div>
+            <h3>Verify with PIN</h3>
+            <p>When your driver arrives, they enter your 4-digit PIN to confirm it's really you. Then you're on your way.</p>
+        </div>
+    </div>
+</section>
+
+<section class="protocol-section">
+    <h2>Built on open protocol</h2>
+    <p class="desc">RoadFlare is powered by the Ridestr protocol — an open standard for decentralized ridesharing built on Nostr. Anyone can build a compatible app.</p>
+    <div class="tech-pills">
+        <span class="pill">Nostr (NIP-01)</span>
+        <span class="pill">NIP-44 Encryption</span>
+        <span class="pill">Replaceable Events</span>
+        <span class="pill">Geohash Privacy</span>
+        <span class="pill">HTLC Payments (future)</span>
+        <span class="pill">Open Source</span>
+    </div>
+    <a href="https://github.com/variablefate/ridestr" class="btn btn-secondary" style="margin-top: 1rem;">Read the Protocol</a>
+</section>
+
+<footer>
+    <div class="footer-links">
+        <a href="https://github.com/variablefate/ridestr">Protocol</a>
+        <a href="https://github.com/variablefate/roadflare-ios">iOS Source</a>
+        <a href="https://github.com/variablefate/ridestr">Android Source</a>
+    </div>
+    <p>RoadFlare is open source. No company, no terms of service, no data collection.</p>
+</footer>
+
+</body>
+</html>
