@@ -56,34 +56,27 @@
         .header a span { color: var(--orange); }
         .header a .road { color: var(--text); }
 
-        /* Profile card */
+        /* Profile card — horizontal layout matching mockup */
         .card {
             background: var(--bg-card);
             border: 1px solid var(--border);
+            border-left: 3px solid var(--orange);
             border-radius: 16px;
-            overflow: hidden;
-        }
-        .card-banner {
-            height: 100px;
-            background: linear-gradient(135deg, rgba(244,149,0,0.15) 0%, rgba(244,149,0,0.05) 100%);
-            background-size: cover;
-            background-position: center;
-        }
-        .card-body {
-            padding: 0 1.5rem 1.5rem;
-            margin-top: -36px;
+            padding: 1.25rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
         }
         .avatar {
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
             background: var(--bg);
-            border: 3px solid var(--bg-card);
+            flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            margin-bottom: 0.75rem;
         }
         .avatar img {
             width: 100%;
@@ -91,35 +84,36 @@
             object-fit: cover;
         }
         .avatar-placeholder {
-            font-size: 28px;
+            font-size: 32px;
             color: var(--orange);
         }
+        .card-info {
+            flex: 1;
+            min-width: 0;
+        }
         .profile-name {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
             letter-spacing: -0.02em;
+            line-height: 1.2;
         }
-        .profile-npub {
-            font-size: 0.75rem;
-            color: var(--text-dim);
-            font-family: 'SF Mono', 'Menlo', monospace;
-            word-break: break-all;
-            margin-top: 0.25rem;
-        }
-        .profile-about {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: 0.75rem;
-        }
-        .profile-type {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 100px;
+        .vehicle-text {
             font-size: 0.7rem;
             font-weight: 600;
             text-transform: uppercase;
+            letter-spacing: 0.03em;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
+        }
+        .profile-type {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 100px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
             letter-spacing: 0.05em;
-            margin-top: 0.75rem;
+            margin-top: 0.5rem;
         }
         .type-driver {
             color: var(--orange);
@@ -130,25 +124,6 @@
             color: #4FC3F7;
             border: 1px solid rgba(79, 195, 247, 0.3);
             background: rgba(79, 195, 247, 0.08);
-        }
-        .vehicle-info {
-            margin-top: 1rem;
-            padding: 0.75rem 1rem;
-            background: rgba(244, 149, 0, 0.06);
-            border: 1px solid rgba(244, 149, 0, 0.12);
-            border-radius: 10px;
-        }
-        .vehicle-label {
-            font-size: 0.7rem;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.25rem;
-        }
-        .vehicle-value {
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--text);
         }
 
         /* QR section */
@@ -164,6 +139,47 @@
             color: var(--text-dim);
             margin-top: 0.5rem;
         }
+
+        /* Account ID (tap to copy) */
+        .account-id {
+            margin-top: 1rem;
+            text-align: center;
+        }
+        .account-id-label {
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.35rem;
+        }
+        .account-id-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: border-color 0.2s;
+            max-width: 100%;
+        }
+        .account-id-btn:hover { border-color: var(--text-dim); }
+        .account-id-btn .npub-text {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            font-family: 'SF Mono', 'Menlo', monospace;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .account-id-btn .copy-icon {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            flex-shrink: 0;
+        }
+        .account-id-btn.copied { border-color: #4CAF50; }
+        .account-id-btn.copied .copy-icon { color: #4CAF50; }
 
         /* Action buttons */
         .actions {
@@ -222,11 +238,11 @@
         .skeleton-line.short { width: 60%; }
         .skeleton-line.medium { width: 80%; }
         .skeleton-avatar {
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
             background: var(--border);
-            margin-bottom: 0.75rem;
+            flex-shrink: 0;
         }
         @keyframes pulse {
             0%, 100% { opacity: 1; }
@@ -287,10 +303,9 @@
     <!-- Share profile page -->
     <div id="share-page" class="hidden">
         <!-- Loading state -->
-        <div id="loading" class="card">
-            <div class="card-banner"></div>
-            <div class="card-body skeleton">
-                <div class="skeleton-avatar"></div>
+        <div id="loading" class="card skeleton">
+            <div class="skeleton-avatar"></div>
+            <div class="card-info">
                 <div class="skeleton-line short"></div>
                 <div class="skeleton-line medium"></div>
             </div>
@@ -299,25 +314,27 @@
         <!-- Loaded profile -->
         <div id="profile" class="hidden">
             <div class="card">
-                <div class="card-banner" id="profile-banner"></div>
-                <div class="card-body">
-                    <div class="avatar" id="profile-avatar">
-                        <span class="avatar-placeholder">&#x1F464;</span>
-                    </div>
+                <div class="avatar" id="profile-avatar">
+                    <span class="avatar-placeholder">&#x1F464;</span>
+                </div>
+                <div class="card-info">
                     <div class="profile-name" id="profile-name"></div>
-                    <div class="profile-npub" id="profile-npub"></div>
+                    <div class="vehicle-text hidden" id="vehicle-text"></div>
                     <span class="profile-type" id="profile-type"></span>
-                    <div class="profile-about hidden" id="profile-about"></div>
-                    <div class="vehicle-info hidden" id="vehicle-info">
-                        <div class="vehicle-label">Vehicle</div>
-                        <div class="vehicle-value" id="vehicle-value"></div>
-                    </div>
                 </div>
             </div>
 
             <div class="qr-section">
                 <canvas id="qr-canvas" width="160" height="160"></canvas>
                 <div class="qr-label">Scan to view this profile</div>
+            </div>
+
+            <div class="account-id">
+                <div class="account-id-label">Account ID</div>
+                <button class="account-id-btn" id="copy-npub-btn">
+                    <span class="npub-text" id="npub-text"></span>
+                    <span class="copy-icon" id="copy-icon">&#x1F4CB;</span>
+                </button>
             </div>
 
             <div class="actions">
@@ -902,7 +919,6 @@ async function renderSharePage(type, npub) {
     // Populate
     const name = profile.display_name || profile.name || npub.slice(0, 16) + '...';
     document.getElementById('profile-name').textContent = name;
-    document.getElementById('profile-npub').textContent = npub;
 
     // Type badge
     const typeEl = document.getElementById('profile-type');
@@ -920,24 +936,13 @@ async function renderSharePage(type, npub) {
         avatarEl.appendChild(img);
     }
 
-    // Banner
-    if (profile.banner) {
-        document.getElementById('profile-banner').style.backgroundImage = `url(${profile.banner})`;
-    }
-
-    // About
-    if (profile.about) {
-        const aboutEl = document.getElementById('profile-about');
-        aboutEl.textContent = profile.about;
-        aboutEl.classList.remove('hidden');
-    }
-
-    // Vehicle (drivers only)
+    // Vehicle (drivers only) — shown as subtitle under name
     if (isDriver) {
-        const parts = [profile.car_color, profile.car_year, profile.car_make, profile.car_model].filter(Boolean);
+        const parts = [profile.car_color, profile.car_make, profile.car_model].filter(Boolean);
         if (parts.length > 0) {
-            document.getElementById('vehicle-value').textContent = parts.join(' ');
-            document.getElementById('vehicle-info').classList.remove('hidden');
+            const vehicleEl = document.getElementById('vehicle-text');
+            vehicleEl.textContent = parts.join(' ');
+            vehicleEl.classList.remove('hidden');
         }
     }
 
@@ -946,6 +951,21 @@ async function renderSharePage(type, npub) {
     try {
         generateQR(pageUrl, document.getElementById('qr-canvas'), 160);
     } catch (_) {}
+
+    // Account ID (tap to copy)
+    document.getElementById('npub-text').textContent = npub;
+    document.getElementById('copy-npub-btn').addEventListener('click', () => {
+        navigator.clipboard.writeText(npub).then(() => {
+            const btn = document.getElementById('copy-npub-btn');
+            const icon = document.getElementById('copy-icon');
+            btn.classList.add('copied');
+            icon.textContent = '\u2713';
+            setTimeout(() => {
+                btn.classList.remove('copied');
+                icon.textContent = '\u{1F4CB}';
+            }, 2000);
+        });
+    });
 
     // Deep link
     document.getElementById('add-btn').href = 'nostr:' + npub;
