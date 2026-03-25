@@ -139,15 +139,15 @@
     <h3>What is encrypted</h3>
     <p>Most sensitive data is encrypted using <strong>NIP-44</strong> (ChaCha20-Poly1305 authenticated encryption) so that only the intended recipient can read it:</p>
     <ul>
-        <li><strong>Ride offers</strong> &mdash; Precise pickup location, destination, fare estimate, and payment methods. Encrypted to your chosen driver. Since RoadFlare only connects you with drivers you already know and trust, full-precision locations are shared directly.</li>
+        <li><strong>Ride offers</strong> &mdash; Precise pickup location, destination, fare estimate, and payment methods. Encrypted to the driver you select.</li>
         <li><strong>Ride confirmations</strong> &mdash; Pickup location confirmed after driver acceptance. Encrypted to your driver.</li>
         <li><strong>Chat messages</strong> &mdash; All in-ride messages. Encrypted point-to-point.</li>
         <li><strong>Cancellations</strong> &mdash; Reason for cancellation. Encrypted to the other party.</li>
-        <li><strong>Driver locations</strong> &mdash; Precise latitude and longitude of drivers broadcasting their availability. Encrypted with a shared key that drivers only give to approved followers.</li>
+        <li><strong>Driver locations</strong> &mdash; Precise latitude and longitude of drivers broadcasting their availability. Encrypted with a shared key that drivers choose to give to you when they approve your follow request.</li>
         <li><strong>Profile backups</strong> &mdash; Your settings, saved locations, and ride history. Encrypted to your own key (only you can decrypt).</li>
         <li><strong>Followed drivers list</strong> &mdash; The full list with notes and encryption keys. Encrypted to your own key.</li>
     </ul>
-    <p>Because RoadFlare is a trusted-network app &mdash; you only interact with drivers you personally know &mdash; encrypted ride data contains precise locations. The broader Ridestr protocol supports progressive location reveal for rides with unknown parties, but RoadFlare does not use this feature.</p>
+    <p>You control who receives your data by choosing which drivers to add to your list. Drivers control who sees their location by choosing which follow requests to approve. All encrypted content is inaccessible to third parties &mdash; including relay operators, network observers, and the RoadFlare developers &mdash; without the private key of either you or the specific driver you are communicating with.</p>
 
     <h3>What is visible in plaintext</h3>
     <p>The Nostr protocol requires certain metadata to be unencrypted for events to be routed and filtered. The following is visible to relay operators and anyone querying the relay:</p>
