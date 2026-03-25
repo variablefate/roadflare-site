@@ -142,6 +142,7 @@
         <li><strong>Ride offers</strong> &mdash; Precise pickup location, destination, fare estimate, and payment methods. Encrypted to the driver you select.</li>
         <li><strong>Ride confirmations</strong> &mdash; Pickup location confirmed after driver acceptance. Encrypted to your driver.</li>
         <li><strong>Chat messages</strong> &mdash; All in-ride messages. Encrypted point-to-point.</li>
+        <li><strong>Cancellations</strong> &mdash; Encrypted to the other party.</li>
         <li><strong>Driver locations</strong> &mdash; Precise latitude and longitude of drivers broadcasting their availability. Encrypted with a shared key that drivers choose to give to you when they approve your follow request.</li>
         <li><strong>Profile backups</strong> &mdash; Your settings, saved locations, and ride history. Encrypted to your own key (only you can decrypt).</li>
         <li><strong>Followed drivers list</strong> &mdash; The full list with notes and encryption keys. Encrypted to your own key.</li>
@@ -155,7 +156,8 @@
         <li><strong>Recipient public keys</strong> &mdash; The public key of who you are communicating with (in event tags).</li>
         <li><strong>Timestamps</strong> &mdash; When each event was created.</li>
         <li><strong>Event types</strong> &mdash; The kind number reveals the category of action (ride offer, chat, location broadcast, etc.).</li>
-        <li><strong>Profile information (Kind 0)</strong> &mdash; If you set a display name, it is published as plaintext per the Nostr NIP-01 standard. This is visible to anyone.</li>
+        <li><strong>Followed driver pubkeys</strong> &mdash; The public keys of drivers you follow are included as public tags on your followed drivers list event. This is a design feature that allows drivers to discover your follow request and approve it. The list content (notes, encryption keys) remains encrypted &mdash; only the public key identifiers are visible.</li>
+        <li><strong>Display name</strong> &mdash; If you set a display name, it is published as plaintext per the Nostr NIP-01 standard. This is visible to anyone. RoadFlare does not publish any other profile fields (bio, photo, etc.).</li>
     </ul>
 
     <h3>What ride acceptance reveals</h3>
@@ -188,7 +190,7 @@
 
     <h2>7. Data Permanence</h2>
     <p>Information published to Nostr relays should be considered <strong>potentially permanent</strong>. While most RoadFlare events include expiration tags (ranging from 5 minutes to 24 hours), relay operators are not required to honor deletion or expiration requests. Any user or relay on the network may retain a copy of events they have seen.</p>
-    <p>Your encrypted content cannot be read without the corresponding private key, but the plaintext metadata (public keys, timestamps, event types, geohash tags) may persist indefinitely.</p>
+    <p>Your encrypted content cannot be read without the corresponding private key, but the plaintext metadata (public keys, timestamps, event types) may persist indefinitely.</p>
 
     <h2>8. Data Portability</h2>
     <p>Your Nostr identity is a cryptographic key pair that you control. You can export your private key (nsec) and use it with any Nostr-compatible application. No permission from RoadFlare or any third party is required. Your followed drivers list, profile, and settings are backed up as encrypted Nostr events that any compatible client can restore.</p>
