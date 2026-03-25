@@ -822,7 +822,7 @@ function applyMask(matrix, reserved, mask, size) {
 
 function scoreMask(matrix, size) {
     let score = 0;
-    // Rule 1: consecutive same-color in rows/cols
+    // Rule 1: consecutive same-color runs in rows/cols
     for (let r = 0; r < size; r++) {
         let count = 1;
         for (let c = 1; c < size; c++) {
@@ -839,6 +839,29 @@ function scoreMask(matrix, size) {
         }
         if (count >= 5) score += count - 2;
     }
+    // Rule 2: 2x2 blocks of same color
+    for (let r = 0; r < size - 1; r++) {
+        for (let c = 0; c < size - 1; c++) {
+            const v = matrix[r][c];
+            if (v === matrix[r][c+1] && v === matrix[r+1][c] && v === matrix[r+1][c+1]) score += 3;
+        }
+    }
+    // Rule 3: finder-like patterns (1:1:3:1:1)
+    for (let r = 0; r < size; r++) {
+        for (let c = 0; c < size - 6; c++) {
+            if (matrix[r][c] && !matrix[r][c+1] && matrix[r][c+2] && matrix[r][c+3] && matrix[r][c+4] && !matrix[r][c+5] && matrix[r][c+6]) score += 40;
+        }
+    }
+    for (let c = 0; c < size; c++) {
+        for (let r = 0; r < size - 6; r++) {
+            if (matrix[r][c] && !matrix[r+1][c] && matrix[r+2][c] && matrix[r+3][c] && matrix[r+4][c] && !matrix[r+5][c] && matrix[r+6][c]) score += 40;
+        }
+    }
+    // Rule 4: dark module ratio penalty
+    let dark = 0;
+    for (let r = 0; r < size; r++) for (let c = 0; c < size; c++) if (matrix[r][c]) dark++;
+    const pct = dark / (size * size) * 100;
+    score += Math.floor(Math.abs(pct - 50) / 5) * 10;
     return score;
 }
 
@@ -872,9 +895,15 @@ function writeVersionInfo(matrix, ver, size) {
     if (ver < 7) return;
     let rem = ver;
     for (let i = 11; i >= 0; i--) {
-        if (rem & (1 << (i + 6))) rem ^= 0x1F25 << (i - 6 >= 0 ? i - 6 : 0);
+        if (rem & (1 << (i + 6))) rem ^= 0x1F25 << i;
     }
-    // Simplified: skip version info for now (only needed ver >= 7)
+    const encoded = (ver << 12) | rem;
+    for (let i = 0; i < 18; i++) {
+        const bit = ((encoded >> i) & 1) === 1;
+        const r = Math.floor(i / 3), c = size - 11 + (i % 3);
+        matrix[r][c] = bit;
+        matrix[c][r] = bit;
+    }
 }
 
 // ============================================================
@@ -925,8 +954,8 @@ async function renderSharePage(type, npub) {
     typeEl.textContent = isDriver ? 'Driver' : 'Rider';
     typeEl.classList.add(isDriver ? 'type-driver' : 'type-rider');
 
-    // Avatar
-    if (profile.picture) {
+    // Avatar (validate URL to prevent XSS via javascript: or data: URIs)
+    if (profile.picture && /^https?:\/\//i.test(profile.picture)) {
         const avatarEl = document.getElementById('profile-avatar');
         const img = document.createElement('img');
         img.src = profile.picture;
@@ -964,7 +993,7 @@ async function renderSharePage(type, npub) {
                 btn.classList.remove('copied');
                 icon.textContent = '\u{1F4CB}';
             }, 2000);
-        });
+        }).catch(() => {});
     });
 
     // Deep link
