@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — RoadFlare</title>
+    <meta name="description" content="RoadFlare Privacy Policy. How your data is handled in a decentralized rideshare app built on Nostr.">
+    <meta name="theme-color" content="#F49500">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+    <style>
+        :root {
+            --orange: #F49500;
+            --orange-light: #FFB84D;
+            --bg: #0A0A0A;
+            --bg-card: #141414;
+            --text: #F5F5F5;
+            --text-muted: #888;
+            --text-dim: #555;
+            --border: #222;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 3rem 2rem 6rem;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+        .back-link:hover { color: var(--orange); }
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+        h1 span { color: var(--orange); }
+        .last-updated {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            margin-bottom: 3rem;
+        }
+        h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-top: 2.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+        }
+        h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        p, li {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+        }
+        ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+        li { margin-bottom: 0.4rem; }
+        strong { color: var(--text); font-weight: 600; }
+        .callout {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .callout p { margin-bottom: 0; }
+        code {
+            background: var(--bg-card);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--orange);
+        }
+        a { color: var(--orange); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        footer {
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+        footer a { color: var(--text-muted); }
+        footer a:hover { color: var(--orange); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="/" class="back-link">&larr; Back to RoadFlare</a>
+
+    <h1>Privacy <span>Policy</span></h1>
+    <p class="last-updated">Last updated: March 25, 2026</p>
+
+    <div class="callout">
+        <p><strong>Summary:</strong> RoadFlare is an open-source client for the Nostr protocol. The developers do not operate servers, do not collect your data, and do not have access to your account. Your private key never leaves your device.</p>
+    </div>
+
+    <h2>1. What RoadFlare Is</h2>
+    <p>RoadFlare is a free, open-source iOS application that acts as a client for the <strong>Ridestr protocol</strong>, a rideshare coordination protocol built on <a href="https://nostr.com">Nostr</a> (Notes and Other Stuff Transmitted by Relays). RoadFlare is not a service, platform, or transportation company. It is software that you run on your device to communicate with other users via third-party relay servers.</p>
+    <p>There is no company behind RoadFlare. No one operates a central server. No one has the ability to access, modify, or delete your account.</p>
+
+    <h2>2. Data the Developers Collect</h2>
+    <p><strong>None.</strong> The developers of RoadFlare do not collect, store, process, or have access to any personal information. There are no analytics, no tracking pixels, no crash reporters, and no server-side logs. The app communicates exclusively with third-party Nostr relays that you connect to.</p>
+
+    <h2>3. Data Stored on Your Device</h2>
+    <p>RoadFlare stores the following data locally on your device:</p>
+    <ul>
+        <li><strong>Identity private key</strong> &mdash; Stored in the iOS Keychain (encrypted at rest by the operating system). This key is used to sign events and is never transmitted.</li>
+        <li><strong>Profile settings</strong> &mdash; Your display name, preferred payment methods, distance units, and currency preference.</li>
+        <li><strong>Followed drivers list</strong> &mdash; The public keys of drivers you follow, along with their shared encryption keys.</li>
+        <li><strong>Saved locations</strong> &mdash; Addresses you save for quick access (favorites and recents).</li>
+        <li><strong>Ride history</strong> &mdash; Records of completed and cancelled rides.</li>
+        <li><strong>Cached driver profiles</strong> &mdash; Names, profile photos, and vehicle information fetched from Nostr.</li>
+    </ul>
+    <p>All locally stored data can be deleted by logging out of the app or deleting the app from your device. Note that iOS Keychain data may persist across app reinstalls unless explicitly cleared.</p>
+
+    <h2>4. Data Transmitted via Nostr</h2>
+    <p>When you use RoadFlare, the app publishes signed events to Nostr relay servers. These events follow the Ridestr protocol and contain different types of data depending on the action.</p>
+
+    <h3>What is encrypted</h3>
+    <p>Most sensitive data is encrypted using <strong>NIP-44</strong> (ChaCha20-Poly1305 authenticated encryption) so that only the intended recipient can read it:</p>
+    <ul>
+        <li><strong>Ride offers</strong> &mdash; Pickup location (approximate, ~1km precision), destination, fare estimate, and payment methods. Encrypted to your chosen driver.</li>
+        <li><strong>Ride confirmations</strong> &mdash; Precise pickup location (revealed only after driver acceptance). Encrypted to your driver.</li>
+        <li><strong>Chat messages</strong> &mdash; All in-ride messages. Encrypted point-to-point.</li>
+        <li><strong>Cancellations</strong> &mdash; Reason for cancellation. Encrypted to the other party.</li>
+        <li><strong>Driver locations</strong> &mdash; Precise latitude and longitude of drivers broadcasting their availability. Encrypted with a shared key only given to approved followers.</li>
+        <li><strong>Profile backups</strong> &mdash; Your settings, saved locations, and ride history. Encrypted to your own key (only you can decrypt).</li>
+        <li><strong>Followed drivers list</strong> &mdash; The full list with notes and encryption keys. Encrypted to your own key.</li>
+    </ul>
+
+    <h3>What is visible in plaintext</h3>
+    <p>The Nostr protocol requires certain metadata to be unencrypted for events to be routed and filtered. The following is visible to relay operators and anyone querying the relay:</p>
+    <ul>
+        <li><strong>Your public key</strong> &mdash; A 64-character hexadecimal identifier. This is not your name or email; it is a cryptographic identifier.</li>
+        <li><strong>Recipient public keys</strong> &mdash; The public key of who you are communicating with (in event tags).</li>
+        <li><strong>Timestamps</strong> &mdash; When each event was created.</li>
+        <li><strong>Event types</strong> &mdash; The kind number reveals the category of action (ride offer, chat, location broadcast, etc.).</li>
+        <li><strong>Geohash tags</strong> &mdash; Coarse location regions (approximately 39km to 5km precision) used for geographic filtering of driver location broadcasts. These do not reveal precise coordinates.</li>
+        <li><strong>Driver availability status</strong> &mdash; Whether a driver is online, on a ride, or offline (in location broadcast tags).</li>
+        <li><strong>Profile information (Kind 0)</strong> &mdash; If you set a display name, it is published as plaintext per the Nostr NIP-01 standard. This is visible to anyone.</li>
+    </ul>
+
+    <h3>What ride acceptance reveals</h3>
+    <p>When a driver accepts your ride offer, their acceptance event contains their response status. Per the Ridestr protocol, ride acceptance content is transmitted as plaintext JSON (not encrypted). This is limited to the acceptance status and optional payment method confirmation.</p>
+
+    <h3>Progressive location reveal</h3>
+    <p>RoadFlare uses a privacy-preserving <strong>progressive location reveal</strong> strategy during rides:</p>
+    <ul>
+        <li>Your pickup location is initially shared at ~1km approximate precision.</li>
+        <li>Your precise pickup address is only revealed after the driver accepts and is nearby.</li>
+        <li>Your destination is encrypted and only visible to your driver.</li>
+        <li>All location data during the ride is encrypted between you and your driver.</li>
+    </ul>
+
+    <h2>5. Nostr Relays</h2>
+    <p>RoadFlare connects to third-party Nostr relay servers to send and receive events. The default relays are:</p>
+    <ul>
+        <li><code>wss://relay.damus.io</code></li>
+        <li><code>wss://nos.lol</code></li>
+        <li><code>wss://relay.primal.net</code></li>
+    </ul>
+    <p><strong>Relay operators can see:</strong></p>
+    <ul>
+        <li>Your IP address (unless you use a VPN)</li>
+        <li>All plaintext event metadata listed above</li>
+        <li>Which public keys you are requesting (your subscription filters)</li>
+        <li>Encrypted event content (as opaque ciphertext they cannot read)</li>
+    </ul>
+    <p>Each relay is operated by an independent third party and has its own privacy practices. The RoadFlare developers do not operate any relays and have no control over relay data retention or policies.</p>
+
+    <h2>6. Third-Party Services</h2>
+    <p>The app uses the following device and network services:</p>
+    <ul>
+        <li><strong>Apple Maps / MapKit</strong> &mdash; For address search, route calculation, and map display. Subject to <a href="https://www.apple.com/legal/privacy/">Apple's Privacy Policy</a>.</li>
+        <li><strong>Apple Core Location</strong> &mdash; For GPS positioning when you use "Current Location" as a pickup. Location access requires your explicit permission and can be revoked at any time in iOS Settings.</li>
+        <li><strong>CoinGecko API</strong> &mdash; For Bitcoin-to-USD exchange rate (used for satoshi fare conversion). No personal data is sent; only a price query. Subject to <a href="https://www.coingecko.com/en/privacy">CoinGecko's Privacy Policy</a>.</li>
+    </ul>
+    <p>RoadFlare does not use any analytics services, advertising networks, or crash reporting tools.</p>
+
+    <h2>7. Data Permanence</h2>
+    <p>Information published to Nostr relays should be considered <strong>potentially permanent</strong>. While most RoadFlare events include expiration tags (ranging from 5 minutes to 24 hours), relay operators are not required to honor deletion or expiration requests. Any user or relay on the network may retain a copy of events they have seen.</p>
+    <p>Your encrypted content cannot be read without the corresponding private key, but the plaintext metadata (public keys, timestamps, event types, geohash tags) may persist indefinitely.</p>
+
+    <h2>8. Data Portability</h2>
+    <p>Your Nostr identity is a cryptographic key pair that you control. You can export your private key (nsec) and use it with any Nostr-compatible application. No permission from RoadFlare or any third party is required. Your followed drivers list, profile, and settings are backed up as encrypted Nostr events that any compatible client can restore.</p>
+
+    <h2>9. Children</h2>
+    <p>RoadFlare does not knowingly collect information from children under 17. The app does not verify age because it does not collect personal information. Use of the app to coordinate real-world transportation is intended for adults.</p>
+
+    <h2>10. Changes to This Policy</h2>
+    <p>This policy may be updated to reflect changes in the app or protocol. The "Last updated" date at the top will be revised accordingly. Since RoadFlare is open source, all changes are visible in the <a href="https://github.com/variablefate/roadflare-site">source repository</a>.</p>
+
+    <h2>11. Contact</h2>
+    <p>RoadFlare is an open-source project with no company or formal entity. For questions or concerns about privacy, please <a href="https://github.com/variablefate/roadflare-ios/issues">open an issue</a> on GitHub.</p>
+</div>
+
+<footer>
+    <p><a href="/">RoadFlare</a> &middot; <a href="/terms">Terms of Service</a> &middot; <a href="https://github.com/variablefate/roadflare-ios">Source Code</a></p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service — RoadFlare</title>
+    <meta name="description" content="RoadFlare Terms of Service. Understanding what RoadFlare is and isn't.">
+    <meta name="theme-color" content="#F49500">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+    <style>
+        :root {
+            --orange: #F49500;
+            --orange-light: #FFB84D;
+            --bg: #0A0A0A;
+            --bg-card: #141414;
+            --text: #F5F5F5;
+            --text-muted: #888;
+            --text-dim: #555;
+            --border: #222;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 3rem 2rem 6rem;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+        .back-link:hover { color: var(--orange); }
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+        h1 span { color: var(--orange); }
+        .last-updated {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            margin-bottom: 3rem;
+        }
+        h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-top: 2.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+        }
+        p, li {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+        }
+        ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+        li { margin-bottom: 0.4rem; }
+        strong { color: var(--text); font-weight: 600; }
+        .callout {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .callout p { margin-bottom: 0; }
+        code {
+            background: var(--bg-card);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--orange);
+        }
+        a { color: var(--orange); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        footer {
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+        footer a { color: var(--text-muted); }
+        footer a:hover { color: var(--orange); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="/" class="back-link">&larr; Back to RoadFlare</a>
+
+    <h1>Terms of <span>Service</span></h1>
+    <p class="last-updated">Last updated: March 25, 2026</p>
+
+    <div class="callout">
+        <p><strong>Summary:</strong> RoadFlare is free, open-source software &mdash; not a service or company. It is a protocol client, like an email app. You are responsible for your own keys, your own rides, and your own safety. The software is provided as-is with no warranties.</p>
+    </div>
+
+    <h2>1. What RoadFlare Is</h2>
+    <p>RoadFlare is an open-source iOS application licensed under the <strong>MIT License</strong>. It is a client for the <strong>Ridestr protocol</strong>, an open rideshare coordination protocol built on <a href="https://nostr.com">Nostr</a>.</p>
+    <p>RoadFlare is <strong>not</strong>:</p>
+    <ul>
+        <li>A transportation company or transportation network company (TNC)</li>
+        <li>A ride-hailing service or platform</li>
+        <li>A payment processor or financial service</li>
+        <li>A company, organization, or legal entity of any kind</li>
+    </ul>
+    <p>RoadFlare is software that enables direct, peer-to-peer communication between users over the Nostr protocol. It does not match riders with drivers, set prices, process payments, or employ anyone. All interactions are between individuals who already know each other.</p>
+
+    <h2>2. The Protocol</h2>
+    <p>The Ridestr protocol is an open standard. Events are published to third-party Nostr relay servers, not to any server operated by the RoadFlare project. The protocol defines how ride offers, acceptances, confirmations, and messages are structured and encrypted.</p>
+    <p>Because the protocol is open and decentralized:</p>
+    <ul>
+        <li>No single entity controls the network</li>
+        <li>Anyone can build a compatible app that interoperates with RoadFlare</li>
+        <li>Relay operators independently decide which events to store and forward</li>
+        <li>Events published to relays may persist even after expiration tags</li>
+        <li>No one can guarantee message delivery, uptime, or availability</li>
+    </ul>
+
+    <h2>3. Your Account and Keys</h2>
+    <p>Your identity on Nostr is a cryptographic key pair (a private key and a public key). This key pair is generated on your device and is <strong>entirely your responsibility</strong>.</p>
+    <ul>
+        <li><strong>There is no password reset.</strong> If you lose your private key and have no backup, your account is permanently lost.</li>
+        <li><strong>There is no account recovery service.</strong> No one can recover your key for you.</li>
+        <li><strong>Your private key grants full access.</strong> Anyone with your private key can impersonate you. Keep it secure.</li>
+        <li><strong>Signing is irreversible.</strong> Events signed with your key are cryptographically attributed to you.</li>
+    </ul>
+
+    <h2>4. Your Responsibility</h2>
+    <p>By using RoadFlare, you acknowledge and accept that:</p>
+    <ul>
+        <li><strong>You are responsible for your own safety.</strong> RoadFlare facilitates communication with people you choose to connect with. It does not verify identities, perform background checks, or ensure the safety of any ride.</li>
+        <li><strong>You arrange rides at your own risk.</strong> The developers of RoadFlare are not responsible for any incidents, disputes, injuries, or losses that occur during rides coordinated through the app.</li>
+        <li><strong>You are responsible for compliance with local laws.</strong> Ridesharing regulations vary by jurisdiction. It is your responsibility to ensure that your use of the app complies with applicable local, state, and federal laws.</li>
+        <li><strong>You are responsible for your own payments.</strong> All payments are made directly between riders and drivers using methods of their choosing (Zelle, Venmo, cash, etc.). RoadFlare does not process, hold, or guarantee any payments.</li>
+        <li><strong>You are responsible for the content you publish.</strong> Events you sign and publish to relays are your responsibility. Do not use RoadFlare to publish illegal, abusive, or harmful content.</li>
+    </ul>
+
+    <h2>5. No Warranty</h2>
+    <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT.</p>
+    <p>The developers make no guarantees about:</p>
+    <ul>
+        <li>The availability or reliability of Nostr relays</li>
+        <li>The delivery or receipt of any event or message</li>
+        <li>The accuracy of fare estimates, route calculations, or location data</li>
+        <li>The security of third-party relay servers</li>
+        <li>The behavior of other users or applications on the Nostr network</li>
+        <li>Compatibility with future versions of iOS, Nostr, or any third-party service</li>
+    </ul>
+
+    <h2>6. Limitation of Liability</h2>
+    <p>IN NO EVENT SHALL THE AUTHORS, CONTRIBUTORS, OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+    <p>This includes, without limitation:</p>
+    <ul>
+        <li>Loss of funds, cryptocurrency, or digital assets</li>
+        <li>Loss of private keys or access to accounts</li>
+        <li>Personal injury, property damage, or death arising from rides</li>
+        <li>Data loss, unauthorized access, or relay failures</li>
+        <li>Any damages resulting from reliance on the software</li>
+    </ul>
+
+    <h2>7. No Insurance</h2>
+    <p>RoadFlare does not provide any insurance coverage for rides, drivers, riders, vehicles, or property. Users are strongly encouraged to maintain their own personal auto insurance and to verify that any driver they ride with has appropriate coverage.</p>
+
+    <h2>8. Open Source License</h2>
+    <p>RoadFlare is released under the <strong>MIT License</strong>:</p>
+    <div class="callout">
+        <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files, to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, subject to the condition that the above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+    </div>
+    <p>The full license text is available in the <a href="https://github.com/variablefate/roadflare-ios/blob/main/LICENSE">source repository</a>.</p>
+
+    <h2>9. Relay and Network Conduct</h2>
+    <p>Nostr relay operators may impose their own terms of service, acceptable use policies, and content moderation rules. If a relay operator blocks your public key or refuses to store your events, that is between you and the relay operator. The RoadFlare project has no control over relay policies.</p>
+    <p>You agree not to use RoadFlare to:</p>
+    <ul>
+        <li>Publish illegal content to Nostr relays</li>
+        <li>Harass, threaten, or abuse other users</li>
+        <li>Spam relays with excessive or malicious events</li>
+        <li>Attempt to decrypt, intercept, or tamper with other users' encrypted communications</li>
+        <li>Impersonate other users or forge event signatures</li>
+    </ul>
+
+    <h2>10. Modifications</h2>
+    <p>These terms may be updated from time to time. Changes will be reflected in the "Last updated" date and are visible in the <a href="https://github.com/variablefate/roadflare-site">source repository</a> commit history. Continued use of the app after changes constitutes acceptance of the updated terms.</p>
+
+    <h2>11. Governing Law</h2>
+    <p>These terms shall be governed by and construed in accordance with applicable law, without regard to conflict of law principles. Any disputes arising from the use of this software shall be resolved in the jurisdiction of the user's residence.</p>
+
+    <h2>12. Contact</h2>
+    <p>RoadFlare is an open-source project. For questions about these terms, please <a href="https://github.com/variablefate/roadflare-ios/issues">open an issue</a> on GitHub.</p>
+</div>
+
+<footer>
+    <p><a href="/">RoadFlare</a> &middot; <a href="/privacy">Privacy Policy</a> &middot; <a href="https://github.com/variablefate/roadflare-ios">Source Code</a></p>
+</footer>
+
+</body>
+</html>
