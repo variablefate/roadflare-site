@@ -139,14 +139,15 @@
     <h3>What is encrypted</h3>
     <p>Most sensitive data is encrypted using <strong>NIP-44</strong> (ChaCha20-Poly1305 authenticated encryption) so that only the intended recipient can read it:</p>
     <ul>
-        <li><strong>Ride offers</strong> &mdash; Pickup location (approximate, ~1km precision), destination, fare estimate, and payment methods. Encrypted to your chosen driver.</li>
-        <li><strong>Ride confirmations</strong> &mdash; Precise pickup location (revealed only after driver acceptance). Encrypted to your driver.</li>
+        <li><strong>Ride offers</strong> &mdash; Precise pickup location, destination, fare estimate, and payment methods. Encrypted to your chosen driver. Since RoadFlare only connects you with drivers you already know and trust, full-precision locations are shared directly.</li>
+        <li><strong>Ride confirmations</strong> &mdash; Pickup location confirmed after driver acceptance. Encrypted to your driver.</li>
         <li><strong>Chat messages</strong> &mdash; All in-ride messages. Encrypted point-to-point.</li>
         <li><strong>Cancellations</strong> &mdash; Reason for cancellation. Encrypted to the other party.</li>
-        <li><strong>Driver locations</strong> &mdash; Precise latitude and longitude of drivers broadcasting their availability. Encrypted with a shared key only given to approved followers.</li>
+        <li><strong>Driver locations</strong> &mdash; Precise latitude and longitude of drivers broadcasting their availability. Encrypted with a shared key that drivers only give to approved followers.</li>
         <li><strong>Profile backups</strong> &mdash; Your settings, saved locations, and ride history. Encrypted to your own key (only you can decrypt).</li>
         <li><strong>Followed drivers list</strong> &mdash; The full list with notes and encryption keys. Encrypted to your own key.</li>
     </ul>
+    <p>Because RoadFlare is a trusted-network app &mdash; you only interact with drivers you personally know &mdash; encrypted ride data contains precise locations. The broader Ridestr protocol supports progressive location reveal for rides with unknown parties, but RoadFlare does not use this feature.</p>
 
     <h3>What is visible in plaintext</h3>
     <p>The Nostr protocol requires certain metadata to be unencrypted for events to be routed and filtered. The following is visible to relay operators and anyone querying the relay:</p>
@@ -155,22 +156,13 @@
         <li><strong>Recipient public keys</strong> &mdash; The public key of who you are communicating with (in event tags).</li>
         <li><strong>Timestamps</strong> &mdash; When each event was created.</li>
         <li><strong>Event types</strong> &mdash; The kind number reveals the category of action (ride offer, chat, location broadcast, etc.).</li>
-        <li><strong>Geohash tags</strong> &mdash; Coarse location regions (approximately 39km to 5km precision) used for geographic filtering of driver location broadcasts. These do not reveal precise coordinates.</li>
+        <li><strong>Geohash tags</strong> &mdash; Coarse location regions (approximately 39km to 5km precision) on driver location broadcasts, used for geographic filtering. These do not reveal precise coordinates.</li>
         <li><strong>Driver availability status</strong> &mdash; Whether a driver is online, on a ride, or offline (in location broadcast tags).</li>
         <li><strong>Profile information (Kind 0)</strong> &mdash; If you set a display name, it is published as plaintext per the Nostr NIP-01 standard. This is visible to anyone.</li>
     </ul>
 
     <h3>What ride acceptance reveals</h3>
-    <p>When a driver accepts your ride offer, their acceptance event contains their response status. Per the Ridestr protocol, ride acceptance content is transmitted as plaintext JSON (not encrypted). This is limited to the acceptance status and optional payment method confirmation.</p>
-
-    <h3>Progressive location reveal</h3>
-    <p>RoadFlare uses a privacy-preserving <strong>progressive location reveal</strong> strategy during rides:</p>
-    <ul>
-        <li>Your pickup location is initially shared at ~1km approximate precision.</li>
-        <li>Your precise pickup address is only revealed after the driver accepts and is nearby.</li>
-        <li>Your destination is encrypted and only visible to your driver.</li>
-        <li>All location data during the ride is encrypted between you and your driver.</li>
-    </ul>
+    <p>When a driver accepts your ride offer, their acceptance event contains their response status. Per the Ridestr protocol, ride acceptance content is transmitted as plaintext JSON (not encrypted). This is limited to the acceptance status and optional payment method confirmation. No location data is included in the acceptance.</p>
 
     <h2>5. Nostr Relays</h2>
     <p>RoadFlare connects to third-party Nostr relay servers to send and receive events. The default relays are:</p>
