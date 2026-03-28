@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support — RoadFlare</title>
+    <meta name="description" content="Get help with RoadFlare. Contact support or report an issue.">
+    <meta name="theme-color" content="#F49500">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+    <style>
+        :root {
+            --orange: #F49500;
+            --orange-light: #FFB84D;
+            --bg: #0A0A0A;
+            --bg-card: #141414;
+            --bg-card-hover: #1A1A1A;
+            --text: #F5F5F5;
+            --text-muted: #888;
+            --text-dim: #555;
+            --border: #222;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 3rem 2rem 6rem;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+        .back-link:hover { color: var(--orange); }
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+        h1 span { color: var(--orange); }
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 3rem;
+        }
+        .support-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .support-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .support-card:hover {
+            border-color: var(--text-dim);
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+        .support-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .support-card h2 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .support-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+        .support-card .link-hint {
+            color: var(--orange);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 1.25rem;
+        }
+        a { color: var(--orange); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        footer {
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+        footer a { color: var(--text-muted); }
+        footer a:hover { color: var(--orange); }
+        @media (max-width: 640px) {
+            .support-options { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="/" class="back-link">&larr; Back to RoadFlare</a>
+
+    <h1><span>Support</span></h1>
+    <p class="subtitle">Need help with RoadFlare? Here's how to reach us.</p>
+
+    <div class="support-options">
+        <a href="mailto:support@roadflare.app" class="support-card">
+            <div class="support-icon">&#9993;</div>
+            <h2>Email Support</h2>
+            <p>Send us an email and we'll get back to you as soon as we can.</p>
+            <div class="link-hint">support@roadflare.app</div>
+        </a>
+
+        <a href="https://github.com/variablefate/roadflare-ios/issues/new" class="support-card">
+            <div class="support-icon">&#128736;</div>
+            <h2>Report an Issue</h2>
+            <p>Found a bug or have a feature request? Open an issue on GitHub.</p>
+            <div class="link-hint">Open on GitHub &rarr;</div>
+        </a>
+    </div>
+</div>
+
+<footer>
+    <p><a href="/">RoadFlare</a> &middot; <a href="/terms">Terms of Service</a> &middot; <a href="/privacy">Privacy Policy</a> &middot; <a href="https://github.com/variablefate/roadflare-ios">Source Code</a></p>
+</footer>
+
+</body>
+</html>
