@@ -338,6 +338,7 @@
             </div>
 
             <div class="actions">
+                <a class="btn btn-primary" id="add-driver-btn" href="#" hidden>Add to RoadFlare</a>
                 <div class="store-buttons">
                     <a class="btn btn-secondary" id="appstore-btn" href="https://apps.apple.com/us/app/roadflare/id6761305625">App Store</a>
                     <a class="btn btn-secondary" id="playstore-btn" href="#">Google Play</a>
@@ -994,6 +995,15 @@ async function renderSharePage(type, npub) {
             }, 2000);
         }).catch(() => {});
     });
+
+    // Driver deep link: roadflared:<npub>[?name=...] — handled by RoadFlare iOS
+    if (isDriver) {
+        const driverBtn = document.getElementById('add-driver-btn');
+        const realName = profile.display_name || profile.name || '';
+        const nameParam = realName ? '?name=' + encodeURIComponent(realName) : '';
+        driverBtn.href = 'roadflared:' + npub + nameParam;
+        driverBtn.hidden = false;
+    }
 
     // Google Play placeholder (Android still in development)
     document.getElementById('playstore-btn').href = '#';
