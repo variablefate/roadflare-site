@@ -338,7 +338,6 @@
             </div>
 
             <div class="actions">
-                <a class="btn btn-primary" id="add-btn" href="#">Add to RoadFlare</a>
                 <div class="store-buttons">
                     <a class="btn btn-secondary" id="appstore-btn" href="https://apps.apple.com/us/app/roadflare/id6761305625">App Store</a>
                     <a class="btn btn-secondary" id="playstore-btn" href="#">Google Play</a>
@@ -995,9 +994,6 @@ async function renderSharePage(type, npub) {
             }, 2000);
         }).catch(() => {});
     });
-
-    // Deep link
-    document.getElementById('add-btn').href = 'nostr:' + npub;
 
     // Google Play placeholder (Android still in development)
     document.getElementById('playstore-btn').href = '#';
