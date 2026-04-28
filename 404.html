@@ -926,6 +926,19 @@ async function renderSharePage(type, npub) {
     const isDriver = type === 'd';
     document.title = `RoadFlare — ${isDriver ? 'Driver' : 'Rider'} Profile`;
 
+    // Smart App Banner — drivers only. Surfaces an "OPEN" button for users
+    // with RoadFlare iOS installed (passes app-argument=roadflared:<npub> to
+    // the existing .onOpenURL handler) and a "VIEW" button for users without
+    // (routes to App Store via app-id). Skipped on rider shares because no
+    // app handles `roadflarer:` yet. Injected synchronously before the
+    // network fetch so iOS Safari sees the meta tag during initial layout.
+    if (isDriver) {
+        const banner = document.createElement('meta');
+        banner.name = 'apple-itunes-app';
+        banner.content = `app-id=6761305625, app-argument=roadflared:${npub}`;
+        document.head.appendChild(banner);
+    }
+
     // Decode npub
     const hexPubkey = npubToHex(npub);
     if (!hexPubkey) {
