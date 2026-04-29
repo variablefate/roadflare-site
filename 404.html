@@ -9,6 +9,24 @@
     <meta property="og:description" content="Rides from people you trust. Built on Nostr.">
     <meta property="og:url" content="https://roadflare.app">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+    <script>
+        // Smart App Banner — injected during HEAD parsing (before any body
+        // rendering) so iOS Safari sees the meta tag during its initial scan.
+        // Field reports on Safari accepting JS-added apple-itunes-app meta
+        // tags after page load are mixed; running this synchronously inside
+        // <head> sidesteps the question. Drivers only — no app handles
+        // `roadflarer:` yet, so a banner there would surface a non-functional
+        // OPEN button.
+        (function() {
+            var m = window.location.pathname.match(/^\/share\/d\/(npub1[a-z0-9]{58})(?:[/?]|$)/);
+            if (m) {
+                var meta = document.createElement('meta');
+                meta.name = 'apple-itunes-app';
+                meta.content = 'app-id=6761305625, app-argument=roadflared:' + m[1];
+                document.head.appendChild(meta);
+            }
+        })();
+    </script>
     <style>
         :root {
             --orange: #F49500;
@@ -925,19 +943,6 @@ function writeVersionInfo(matrix, ver, size) {
 async function renderSharePage(type, npub) {
     const isDriver = type === 'd';
     document.title = `RoadFlare — ${isDriver ? 'Driver' : 'Rider'} Profile`;
-
-    // Smart App Banner — drivers only. Surfaces an "OPEN" button for users
-    // with RoadFlare iOS installed (passes app-argument=roadflared:<npub> to
-    // the existing .onOpenURL handler) and a "VIEW" button for users without
-    // (routes to App Store via app-id). Skipped on rider shares because no
-    // app handles `roadflarer:` yet. Injected synchronously before the
-    // network fetch so iOS Safari sees the meta tag during initial layout.
-    if (isDriver) {
-        const banner = document.createElement('meta');
-        banner.name = 'apple-itunes-app';
-        banner.content = `app-id=6761305625, app-argument=roadflared:${npub}`;
-        document.head.appendChild(banner);
-    }
 
     // Decode npub
     const hexPubkey = npubToHex(npub);
