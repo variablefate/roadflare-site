@@ -356,6 +356,7 @@
             </div>
 
             <div class="actions">
+                <a class="btn btn-primary" id="add-driver-btn" href="#" hidden>Add to RoadFlare</a>
                 <div class="store-buttons">
                     <a class="btn btn-secondary" id="appstore-btn" href="https://apps.apple.com/us/app/roadflare/id6761305625">App Store</a>
                     <a class="btn btn-secondary" id="playstore-btn" href="#">Google Play</a>
@@ -1012,6 +1013,19 @@ async function renderSharePage(type, npub) {
             }, 2000);
         }).catch(() => {});
     });
+
+    // Driver deep link: roadflared:<npub>[?name=...] — handled by RoadFlare iOS.
+    // Custom scheme (vs. https://) so a same-page tap deterministically launches
+    // the app — Universal Links don't fire on same-URL clicks in Safari, and this
+    // button also serves non-Safari browsers (Chrome on iOS/Android, desktop) where
+    // the Smart App Banner doesn't render.
+    if (isDriver) {
+        const driverBtn = document.getElementById('add-driver-btn');
+        const realName = profile.display_name || profile.name || '';
+        const nameParam = realName ? '?name=' + encodeURIComponent(realName) : '';
+        driverBtn.href = 'roadflared:' + npub + nameParam;
+        driverBtn.hidden = false;
+    }
 
     // Google Play placeholder (Android still in development)
     document.getElementById('playstore-btn').href = '#';
