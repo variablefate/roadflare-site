@@ -1,4 +1,17 @@
 {
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["6Y98438M9X.com.roadflare.RoadFlare"],
+        "components": [
+          { "/": "/share/d/*/*", "exclude": true, "comment": "Reject deeper /share/d paths than a single npub segment" },
+          { "/": "/share/r/*/*", "exclude": true, "comment": "Reject deeper /share/r paths than a single npub segment" },
+          { "/": "/share/d/*", "comment": "Driver profile share — opens Add Driver flow" },
+          { "/": "/share/r/*", "comment": "Rider profile share" }
+        ]
+      }
+    ]
+  },
   "webcredentials": {
     "apps": [
       "6Y98438M9X.com.roadflare.RoadFlare"
