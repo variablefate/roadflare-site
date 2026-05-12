@@ -50,6 +50,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
         }
         .container {
             max-width: 480px;
@@ -58,6 +59,9 @@
             flex: 1;
             display: flex;
             flex-direction: column;
+        }
+        @media (max-width: 360px) {
+            .container { padding: 2rem 1rem; }
         }
 
         /* Header */
@@ -114,6 +118,7 @@
             font-weight: 700;
             letter-spacing: -0.02em;
             line-height: 1.2;
+            overflow-wrap: break-word;
         }
         .vehicle-text {
             font-size: 0.7rem;
@@ -122,6 +127,7 @@
             letter-spacing: 0.03em;
             color: var(--text-muted);
             margin-top: 0.2rem;
+            overflow-wrap: break-word;
         }
         .profile-type {
             display: inline-block;
@@ -151,6 +157,8 @@
         }
         .qr-section canvas {
             border-radius: 12px;
+            max-width: 100%;
+            height: auto;
         }
         .qr-label {
             font-size: 0.75rem;
@@ -190,6 +198,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            min-width: 0;  /* required so ellipsis can truncate inside the flex parent — flex children default to min-width: auto, which refuses to shrink below intrinsic content width and would push the viewport sideways */
         }
         .account-id-btn .copy-icon {
             font-size: 0.75rem;
@@ -343,7 +352,7 @@
             </div>
 
             <div class="qr-section">
-                <canvas id="qr-canvas" width="160" height="160"></canvas>
+                <canvas id="qr-canvas" width="240" height="240"></canvas>
                 <div class="qr-label">Scan to view this profile</div>
             </div>
 
@@ -356,6 +365,7 @@
             </div>
 
             <div class="actions">
+                <a class="btn btn-primary hidden" id="add-driver-btn" href="#">Add to RoadFlare</a>
                 <div class="store-buttons">
                     <a class="btn btn-secondary" id="appstore-btn" href="https://apps.apple.com/us/app/roadflare/id6761305625">App Store</a>
                     <a class="btn btn-secondary" id="playstore-btn" href="#">Google Play</a>
@@ -995,7 +1005,7 @@ async function renderSharePage(type, npub) {
     // QR code
     const pageUrl = window.location.href;
     try {
-        generateQR(pageUrl, document.getElementById('qr-canvas'), 160);
+        generateQR(pageUrl, document.getElementById('qr-canvas'), 240);
     } catch (_) {}
 
     // Account ID (tap to copy)
@@ -1012,6 +1022,19 @@ async function renderSharePage(type, npub) {
             }, 2000);
         }).catch(() => {});
     });
+
+    // Driver deep link: roadflared:<npub>[?name=...] — handled by RoadFlare iOS.
+    // Custom scheme (vs. https://) so a same-page tap deterministically launches
+    // the app — Universal Links don't fire on same-URL clicks in Safari, and this
+    // button also serves non-Safari browsers (Chrome on iOS/Android, desktop) where
+    // the Smart App Banner doesn't render.
+    if (isDriver) {
+        const driverBtn = document.getElementById('add-driver-btn');
+        const realName = profile.display_name || profile.name || '';
+        const nameParam = realName ? '?name=' + encodeURIComponent(realName) : '';
+        driverBtn.href = 'roadflared:' + npub + nameParam;
+        driverBtn.classList.remove('hidden');
+    }
 
     // Google Play placeholder (Android still in development)
     document.getElementById('playstore-btn').href = '#';
