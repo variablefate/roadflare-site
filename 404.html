@@ -118,6 +118,7 @@
             font-weight: 700;
             letter-spacing: -0.02em;
             line-height: 1.2;
+            overflow-wrap: break-word;
         }
         .vehicle-text {
             font-size: 0.7rem;
@@ -126,6 +127,7 @@
             letter-spacing: 0.03em;
             color: var(--text-muted);
             margin-top: 0.2rem;
+            overflow-wrap: break-word;
         }
         .profile-type {
             display: inline-block;
@@ -196,7 +198,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            min-width: 0;
+            min-width: 0;  /* required so ellipsis can truncate inside the flex parent — flex children default to min-width: auto, which refuses to shrink below intrinsic content width and would push the viewport sideways */
         }
         .account-id-btn .copy-icon {
             font-size: 0.75rem;
@@ -363,7 +365,7 @@
             </div>
 
             <div class="actions">
-                <a class="btn btn-primary" id="add-driver-btn" href="#" hidden>Add to RoadFlare</a>
+                <a class="btn btn-primary hidden" id="add-driver-btn" href="#">Add to RoadFlare</a>
                 <div class="store-buttons">
                     <a class="btn btn-secondary" id="appstore-btn" href="https://apps.apple.com/us/app/roadflare/id6761305625">App Store</a>
                     <a class="btn btn-secondary" id="playstore-btn" href="#">Google Play</a>
@@ -1031,7 +1033,7 @@ async function renderSharePage(type, npub) {
         const realName = profile.display_name || profile.name || '';
         const nameParam = realName ? '?name=' + encodeURIComponent(realName) : '';
         driverBtn.href = 'roadflared:' + npub + nameParam;
-        driverBtn.hidden = false;
+        driverBtn.classList.remove('hidden');
     }
 
     // Google Play placeholder (Android still in development)
